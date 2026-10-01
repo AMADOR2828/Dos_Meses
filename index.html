@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dos meses · Para Jennifer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --desk:#232654;
+    --paper:#f3f4fd;
+    --grid:rgba(99,110,215,.16);
+    --ink:#1d2150;
+    --pen:#3f4bd0;
+    --margin:#e56f8e;
+    --hl:#ffc2d3;
+    --note:#fff0a6;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Kalam","Segoe Script","Comic Sans MS",cursive;
+    color:var(--ink);
+    background:radial-gradient(120% 80% at 50% 0%,#33387a 0%,var(--desk) 60%,#171a3d 100%) fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{
+    position:relative;max-width:44rem;margin:0 auto;min-height:100vh;
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:32px 32px;
+    box-shadow:0 0 0 1px rgba(255,255,255,.05),0 50px 120px rgba(0,0,0,.6),0 10px 30px rgba(0,0,0,.35);
+    overflow:hidden;
+  }
+  /* margen rojo y perforaciones */
+  .sheet::before{content:"";position:absolute;top:0;bottom:0;left:3rem;width:2px;background:var(--margin);opacity:.65;z-index:2}
+  .sheet::after{content:"";position:absolute;top:0;bottom:0;left:.7rem;width:22px;z-index:2;
+    background:radial-gradient(circle at 11px 90px,var(--desk) 0 8px,rgba(0,0,0,.25) 9px,transparent 10px) 0 0/22px 420px repeat-y}
+  .in{position:relative;z-index:1;padding:0 1.3rem 0 4.3rem}
+
+  .hero{min-height:92svh;display:flex;flex-direction:column;justify-content:center;padding:3rem 0 2rem}
+  .to{font-family:"Caveat",cursive;font-weight:700;font-size:clamp(1.7rem,6vw,2.2rem);color:var(--pen);transform:rotate(-2deg);display:block}
+  .hero h1{font-weight:300;font-size:clamp(3.4rem,15vw,6.6rem);line-height:1.05;margin:.2rem 0 1.4rem;letter-spacing:-.01em;
+    animation:write 2s cubic-bezier(.5,.1,.3,1) .3s both;padding-bottom:.15em}
+  @keyframes write{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 -2% 0 0)}}
+  .wave{width:min(340px,100%);height:56px;display:block}
+  .wave rect{fill:var(--ink)}
+  .cue{margin-top:2rem;align-self:flex-start;font-family:"Caveat",cursive;font-weight:700;font-size:1.6rem;color:var(--pen);text-decoration:none;
+    border-bottom:2px dashed var(--pen)}
+  .cue:focus-visible{outline:2px solid var(--margin);outline-offset:4px}
+
+  .letter{padding-top:4rem}
+  .letter p{font-size:clamp(1.15rem,4.1vw,1.38rem);line-height:2rem;font-weight:300;margin-bottom:2rem}
+  .letter .lead{font-family:"Caveat",cursive;font-weight:700;font-size:2.7rem;line-height:4rem;color:var(--pen);margin-bottom:0}
+  .letter .gap{margin-top:2rem}
+  mark{background:linear-gradient(transparent 52%,var(--hl) 52% 92%,transparent 92%);color:inherit;padding:0 .12em}
+  .lim{font-family:"Caveat",cursive;font-weight:500;font-size:1.55rem;line-height:1.3;color:var(--pen);
+    display:inline-block;transform:rotate(-1.5deg);margin:-.6rem 0 2rem;padding:.2rem .7rem;border:2px solid var(--pen);border-radius:255px 14px 225px 14px/14px 225px 14px 255px}
+  .letter .end{font-family:"Caveat",cursive;font-weight:700;font-size:clamp(2rem,7vw,2.6rem);line-height:1.25;color:var(--pen);margin-top:3rem}
+
+  .ps{padding:2rem 0 2rem}
+  .ps p{font-family:"Caveat",cursive;font-weight:500;font-size:clamp(1.6rem,5.4vw,2rem);line-height:1.3;color:var(--ink)}
+
+  .reveal{padding:1.5rem 0 8rem}
+  .hold{font:inherit;font-family:"Caveat",cursive;font-weight:700;font-size:1.6rem;color:var(--ink);
+    background:linear-gradient(var(--hl),var(--hl)) no-repeat 0 0/0% 100%;
+    border:2px dashed var(--pen);border-radius:14px;padding:.7rem 1.4rem;cursor:pointer;
+    user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation;transition:background-size .3s}
+  .hold.holding{background-size:100% 100%;transition:background-size 1.3s linear}
+  .hold:focus-visible{outline:2px solid var(--margin);outline-offset:4px}
+  .whisper,.sky{display:none}
+  .reveal.done .hold{display:none}
+  .reveal.done .whisper,.reveal.done .sky{display:block;animation:fade 1.8s ease both}
+  .whisper{font-size:clamp(1.5rem,5.4vw,2rem);line-height:1.5;font-weight:300}
+  .whisper mark{padding:0 .2em}
+  .sky{margin-top:1.6rem;font-family:"Caveat",cursive;font-weight:500;font-size:1.5rem;line-height:1.35;color:var(--pen);animation-delay:1.2s!important}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* nota adhesiva: contador de ejercicios */
+  .count{position:fixed;right:max(.9rem,calc(50% - 22rem - 4.5rem));bottom:1.1rem;z-index:5;width:7.2rem;padding:.7rem .6rem .8rem;
+    background:var(--note);color:var(--ink);text-align:center;transform:rotate(3deg);
+    box-shadow:0 14px 24px -8px rgba(0,0,0,.5),inset 0 -14px 18px -14px rgba(0,0,0,.18);font-family:"Caveat",cursive;font-weight:700;line-height:1}
+  .count span{display:block;font-size:1.05rem;font-weight:500;margin-bottom:.25rem}
+  .count b{font-size:2.1rem}.count em{font-style:normal;font-size:1.2rem}
+  .count.done b{color:var(--margin)}
+
+  @media (max-width:560px){
+    .sheet::before{left:2.4rem}.in{padding-left:3.5rem}
+    .count{width:6rem;right:.6rem;bottom:.6rem}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero h1,.reveal.done .whisper,.reveal.done .sky{animation:none}.hold{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sheet" id="sheet">
+ <div class="in">
+  <header class="hero">
+    <small class="to">Para Jennifer</small>
+    <h1>Dos meses</h1>
+    <svg class="wave" id="wave" viewBox="0 0 340 56" role="img" aria-label="Una onda de voz"></svg>
+    <a class="cue" href="#carta">leer la carta</a>
+  </header>
+
+  <article class="letter" id="carta">
+    <p class="lead">Mi amor</p>
+
+    <p>Hoy cumplimos dos meses y no sé, me da mucha ternura pensar en todo esto JAJAJA. Porque si me pongo a pensar en cómo empezó todo, es demasiado random. O sea, quién iba a pensar que por un simple “a ver” después de decir que mi voz era fea iba a terminar conociendo a la persona que hoy quiero tanto.</p>
+
+    <p>Y creo que de las cosas que más recuerdo de nosotros al principio es aquella madrugada en la que te quedaste conmigo mientras hacía mis 200 ejercicios de cálculo. Tú con sueño y aun así ahí conmigo, hablándome, contándome cosas, acompañándome… y yo poco a poco enamorándome de <mark>tu voz</mark> sin darme cuenta.</p>
+
+    <p>Bueno… quizá sí me di cuenta JAJAJA, porque desde entonces <mark>tu voz</mark> se volvió una de mis cosas favoritas.</p>
+
+    <p class="gap">Y ahora míranos, ya llevamos dos meses. Dos meses de hablar, reírnos, molestarnos, tener nuestros momentos bonitos, nuestras conversaciones de madrugada y de ir conociéndonos cada vez más. Y honestamente, me encanta que seas tú.</p>
+
+    <p>Me encantan tus ojos, tu sonrisa, tu hoyuelo, tu risa, cómo te tapas la boca cuando te ríes, cómo te acomodas el pelo… esas pequeñas cosas tuyas que quizá tú ni notas, pero que yo sí noto y que me encantan demasiado.</p>
+
+    <p>No sé cómo explicarlo sin ponerme toda cursi JAJAJA, pero me haces muy feliz. Me gusta tenerte en mi vida, me gusta poder hablar contigo de cualquier tontería y también de cosas importantes, me gusta escucharte y simplemente saber que estás ahí.</p>
+
+    <p class="gap">Gracias por estos dos meses, mi amor. Gracias por haber aparecido de una forma tan inesperada y por convertirte poquito a poquito en alguien tan importante para mí.</p>
+
+    <p>Y espero que este sea apenas el primero de muchísimos meses juntas.</p>
+    <span class="lim">lim (n→∞) meses juntas = ∞</span>
+
+    <p class="end">Te quiero muchísimo, Jennifer.<br>Feliz segundo mes, mi niña.</p>
+  </article>
+
+  <footer class="ps">
+    <p>PD: sigo pensando que <mark>tu voz</mark> fue mi perdición desde el principio</p>
+  </footer>
+
+  <section class="reveal" id="reveal" aria-label="Un momento más íntimo">
+    <button class="hold" id="hold" type="button">mantén presionado, es para ti</button>
+    <p class="whisper" id="whisper"></p>
+    <p class="sky" id="skyNote"></p>
+  </section>
+ </div>
+</div>
+
+<div class="count" id="count" aria-hidden="true"><span>ejercicio</span><b id="n">0</b><em>/200</em></div>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg";
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ====== Edita estos dos textos a tu gusto ====== */
+  var SUSURRO="Me gusta escucharte y simplemente saber que estás ahí.";
+  var CIELO="30 de septiembre de 2025. Un cometa recién descubierto, Lemmon, subía de brillo en el cielo, y Saturno estaba en su mejor momento del año.";
+  /* =============================================== */
+
+  /* onda de voz */
+  var svg=document.getElementById("wave"),N=40,W=340,H=56,G=4,bw=(W-G*(N-1))/N,bars=[];
+  for(var i=0;i<N;i++){
+    var r=document.createElementNS(NS,"rect");
+    r.setAttribute("x",i*(bw+G));r.setAttribute("width",bw);r.setAttribute("rx",bw/2);
+    svg.appendChild(r);bars.push(r);
+  }
+  function draw(t){
+    bars.forEach(function(r,i){
+      var env=Math.sin(Math.PI*i/N);
+      var v=.55*Math.sin(i*.55+t*1.6)+.45*Math.sin(i*.23-t*1.1);
+      var hh=Math.max(3,(.14+.86*env*(.5+.5*v))*H);
+      r.setAttribute("height",hh);r.setAttribute("y",(H-hh)/2);
+    });
+  }
+  if(reduce){draw(2)}else{(function loop(ms){draw(ms/1000);requestAnimationFrame(loop)})(0)}
+
+  /* las líneas del cuaderno se alinean con el texto de la carta */
+  var sheet=document.getElementById("sheet"),letter=document.getElementById("carta");
+  function align(){
+    var top=letter.getBoundingClientRect().top-sheet.getBoundingClientRect().top;
+    sheet.style.backgroundPosition="0 "+(((top%32)+32)%32)+"px";
+  }
+  addEventListener("resize",align);addEventListener("load",align);align();
+
+  /* contador: 200 ejercicios mientras lees */
+  var count=document.getElementById("count"),n=document.getElementById("n");
+  function prog(){
+    var max=document.documentElement.scrollHeight-innerHeight;
+    var p=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+    var v=Math.round(p*200);
+    n.textContent=v>=200?"200 ✓":v;
+    count.classList.toggle("done",v>=200);
+  }
+  addEventListener("scroll",prog,{passive:true});addEventListener("resize",prog);prog();
+
+  /* momento íntimo: mantener presionado */
+  document.getElementById("whisper").innerHTML="<mark></mark>";
+  document.querySelector("#whisper mark").textContent=SUSURRO;
+  document.getElementById("skyNote").textContent=CIELO;
+  var box=document.getElementById("reveal"),hold=document.getElementById("hold"),timer=null;
+  function finish(){clearTimeout(timer);hold.classList.remove("holding");box.classList.add("done")}
+  function start(){if(box.classList.contains("done"))return;hold.classList.add("holding");timer=setTimeout(finish,reduce?0:1300)}
+  function cancel(){if(box.classList.contains("done"))return;clearTimeout(timer);hold.classList.remove("holding")}
+  hold.addEventListener("pointerdown",start);
+  ["pointerup","pointerleave","pointercancel"].forEach(function(ev){hold.addEventListener(ev,cancel)});
+  hold.addEventListener("contextmenu",function(e){e.preventDefault()});
+  hold.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();finish()}});
+})();
+</script>
+</body>
+</html>
